@@ -1,0 +1,159 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap');
+
+:root {
+  --gradient-bg: linear-gradient(to bottom right, #9c27b0, #e91e63, #f44336);
+  --gradient-button: linear-gradient(to right, #ffc107, #4caf50, #2196f3);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--gradient-bg);
+  padding: 1rem;
+}
+
+.container {
+  width: 100%;
+  max-width: 64rem;
+  background-color: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(10px);
+  border-radius: 1.5rem;
+  overflow: hidden;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
+
+.flex-container {
+  display: flex;
+  flex-direction: column;
+}
+
+@media (min-width: 768px) {
+  .flex-container {
+    flex-direction: row;
+  }
+}
+
+.left-section,
+.right-section {
+  flex: 1;
+}
+
+.left-section {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTqH4pd-1Nv0RqiZ-YQdf520T6RvIiYavgXBw&s");
+  background-size: cover;
+  background-position: center;
+  border-radius: 1.5rem 0 0 1.5rem;
+  min-height: 300px;
+}
+
+.right-section {
+  padding: 2rem;
+}
+
+h2 {
+  font-size: 2rem;
+  font-weight: 700;
+  text-align: center;
+  color: white;
+  margin-bottom: 1.5rem;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+label {
+  display: block;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: white;
+  margin-bottom: 0.25rem;
+}
+
+input {
+  width: 100%;
+  padding: 0.5rem 1rem;
+  background-color: rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 9999px;
+  color: white;
+  font-size: 1rem;
+  transition: all 0.2s ease-in-out;
+}
+
+input::placeholder {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+input:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.5);
+}
+
+button {
+  width: 100%;
+  padding: 0.5rem 1rem;
+  background: var(--gradient-button);
+  color: white;
+  border: none;
+  border-radius: 9999px;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+
+button:hover {
+  transform: scale(1.05);
+}
+
+button:active {
+  transform: scale(0.95);
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideIn {
+  from { transform: translateY(20px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+.container {
+  animation: fadeIn 0.5s ease-out;
+}
+
+.left-section,
+.right-section {
+  animation: slideIn 0.5s ease-out;
+}
+
+.left-section {
+  animation-delay: 0.2s;
+}
+
+.right-section {
+  animation-delay: 0.4s;
+}
+
+@media (max-width: 767px) {
+  .left-section {
+    border-radius: 1.5rem 1.5rem 0 0;
+  }
+}

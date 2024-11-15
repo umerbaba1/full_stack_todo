@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>To-Do Signup Page</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="container">
+    <!-- Left Section -->
+    <div class="left-section"></div>
+
+    <!-- Right Section -->
+    <div class="right-section">
+      <h2>Sign Up</h2>
+      <form action="/signup" method="POST" class="signup-form">
+        <div class="input-group">
+          <label for="username">Username</label>
+          <input type="text" id="username" name="username" placeholder="Enter your username" required>
+        </div>
+        <div class="input-group">
+          <label for="password">Password</label>
+          <input type="password" id="password" name="password" placeholder="Enter your password" required>
+        </div>
+        <button type="submit" class="signup-button">Sign Up</button>
+      </form>
+    </div>
+  </div>
+</body>
+</html>

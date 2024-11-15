@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign In to Your Todo App</title>
+    <link rel="stylesheet" href="signin.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <div class="left-section">
+            <div class="logo-container">
+                <div class="logo-outer"></div>
+                <div class="logo-inner">
+                    <span class="logo-text">Todo</span>
+                </div>
+            </div>
+        </div>
+        <div class="right-section">
+            <h1>Welcome Back!</h1>
+            <p class="subtitle">Sign in to access your todos</p>
+            <form class="signin-form" method="POST" action="/signin">
+                <div class="input-group">
+                    <label for="username">Username</label>
+                    <input type="username" id="username" name="username" required placeholder="john123">
+                </div>
+                <div class="input-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" required placeholder="Your secret password">
+                </div>
+                <button type="submit" class="signin-button">Sign In</button>
+            </form>
+            <p class="signup-link">Don't have an account? <a href="#">Sign up</a></p>
+        </div>
+    </div>
+</body>
+</html>
