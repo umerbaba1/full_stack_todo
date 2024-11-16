@@ -1,182 +1,323 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.7.6/axios.min.js"></script>
     <title>Enhanced Todo App</title>
     <style>
-        :root {
-            --primary-color: #3498db;
-            --primary-hover: #2980b9;
-            --background-color: #f0f4f8;
-            --card-background: #ffffff;
-            --text-color: #333333;
-            --border-color: #e0e0e0;
-        }
+      :root {
+        --primary-color: #3498db;
+        --primary-hover: #2980b9;
+        --background-color: #f0f4f8;
+        --card-background: #ffffff;
+        --text-color: #333333;
+        --border-color: #e0e0e0;
+      }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
 
-        body {
-            font-family: 'Arial', sans-serif;
-            background-color: var(--background-color);
-            color: var(--text-color);
-            line-height: 1.6;
-            padding-top: 80px;
-        }
+      body {
+        font-family: "Arial", sans-serif;
+        background-color: var(--background-color);
+        color: var(--text-color);
+        line-height: 1.6;
+        padding-top: 80px;
+      }
 
-        .user-info {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            display: flex;
-            align-items: center;
-            background-color: var(--card-background);
-            padding: 10px 15px;
-            border-radius: 25px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-        }
+      .user-info {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        display: flex;
+        align-items: center;
+        background-color: var(--card-background);
+        padding: 10px 15px;
+        border-radius: 25px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      }
 
-        .user-info img {
-            width: 30px;
-            height: 30px;
-            border-radius: 50%;
-            margin-right: 10px;
-        }
+      .user-info img {
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        margin-right: 10px;
+      }
 
-        .username {
-            font-size: 0.9rem;
-            font-weight: bold;
-        }
+      .username {
+        font-size: 0.9rem;
+        font-weight: bold;
+      }
 
-        .container {
-            max-width: 600px;
-            margin: 0 auto;
-            padding: 20px;
-        }
+      .container {
+        max-width: 600px;
+        margin: 0 auto;
+        padding: 20px;
+      }
 
-        .app-title {
-            font-size: 2rem;
-            color: var(--primary-color);
-            margin-bottom: 20px;
-            text-align: center;
-        }
+      .app-title {
+        font-size: 2rem;
+        color: var(--primary-color);
+        margin-bottom: 20px;
+        text-align: center;
+      }
 
-        .todo-input {
-            display: flex;
-            margin-bottom: 20px;
-        }
+      .todo-input {
+        display: flex;
+        margin-bottom: 20px;
+      }
 
-        .todo-input input {
-            flex-grow: 1;
-            padding: 12px;
-            font-size: 1rem;
-            border: 2px solid var(--border-color);
-            border-radius: 5px 0 0 5px;
-            transition: border-color 0.3s ease;
-        }
+      .todo-input input {
+        flex-grow: 1;
+        padding: 12px;
+        font-size: 1rem;
+        border: 2px solid var(--border-color);
+        border-radius: 5px 0 0 5px;
+        transition: border-color 0.3s ease;
+      }
 
-        .todo-input input:focus {
-            outline: none;
-            border-color: var(--primary-color);
-        }
+      .todo-input input:focus {
+        outline: none;
+        border-color: var(--primary-color);
+      }
 
-        .todo-input button {
-            padding: 12px 20px;
-            font-size: 1rem;
-            background-color: var(--primary-color);
-            color: white;
-            border: none;
-            border-radius: 0 5px 5px 0;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
+      .todo-input button {
+        padding: 12px 20px;
+        font-size: 1rem;
+        background-color: var(--primary-color);
+        color: white;
+        border: none;
+        border-radius: 0 5px 5px 0;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+      }
 
-        .todo-input button:hover {
-            background-color: var(--primary-hover);
-        }
+      .todo-input button:hover {
+        background-color: var(--primary-hover);
+      }
 
-        .todo-list {
-            list-style-type: none;
-        }
+      .todo-list {
+        list-style-type: none;
+      }
 
-        .todo-item {
-            background-color: var(--card-background);
-            padding: 15px;
-            border-radius: 5px;
-            margin-bottom: 10px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-        }
+      .todo-item {
+        background-color: var(--card-background);
+        padding: 15px;
+        border-radius: 5px;
+        margin-bottom: 10px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      }
 
-        .todo-text {
-            flex-grow: 1;
-        }
+      .todo-text {
+        flex-grow: 1;
+      }
 
-        .todo-actions button {
-            background-color: transparent;
-            border: none;
-            cursor: pointer;
-            font-size: 0.9rem;
-            color: var(--primary-color);
-            margin-left: 10px;
-            transition: color 0.3s ease;
-        }
+      .todo-actions button {
+        background-color: transparent;
+        border: none;
+        cursor: pointer;
+        font-size: 0.9rem;
+        color: var(--primary-color);
+        margin-left: 10px;
+        transition: color 0.3s ease;
+      }
 
-        .todo-actions button:hover {
-            color: var(--primary-hover);
-        }
+      .todo-actions button:hover {
+        color: var(--primary-hover);
+      }
 
-        .icon {
-            width: 16px;
-            height: 16px;
-            vertical-align: middle;
-        }
+      .icon {
+        width: 16px;
+        height: 16px;
+        vertical-align: middle;
+      }
+      /* Styling for added elements */
+      #paragraph p {
+        background-color: #ffffff; /* Card background */
+        border: 1px solid #e0e0e0; /* Light border for separation */
+        border-radius: 5px; /* Rounded corners */
+        padding: 10px; /* Space inside the box */
+        margin: 5px 0; /* Space between elements */
+        font-size: 1rem; /* Text size */
+        color: #333333; /* Text color */
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+        transition: transform 0.2s, background-color 0.2s; /* Animation for hover */
+      }
+
+      /* Hover effect for added elements */
+      #paragraph p:hover {
+        background-color: #f9f9f9; /* Slightly lighter background */
+        transform: scale(1.02); /* Slight zoom effect */
+      }
+      /* Task item container */
+      .task-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background-color: #ffffff; /* Card background */
+        border: 1px solid #e0e0e0; /* Border */
+        border-radius: 5px; /* Rounded corners */
+        padding: 10px;
+        margin: 5px 0;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+      }
+
+      /* Task buttons container */
+      .task-buttons {
+        display: flex;
+        gap: 10px; /* Space between buttons */
+      }
+
+      /* Button base style */
+      .task-buttons button {
+        padding: 5px 10px;
+        border: none;
+        border-radius: 3px;
+        font-size: 0.9rem;
+        cursor: pointer;
+        transition: background-color 0.2s, transform 0.2s;
+      }
+
+      /* Edit button style */
+      .edit-btn {
+        background-color: #f39c12; /* Orange */
+        color: white;
+      }
+
+      .edit-btn:hover {
+        background-color: #e67e22; /* Darker orange */
+        transform: scale(1.05);
+      }
+
+      /* Delete button style */
+      .delete-btn {
+        background-color: #e74c3c; /* Red */
+        color: white;
+      }
+
+      .delete-btn:hover {
+        background-color: #c0392b; /* Darker red */
+        transform: scale(1.05);
+      }
     </style>
-</head>
-<body>
+  </head>
+  <body>
     <div class="user-info">
-        <img src="/public/anime.jpg?height=30&width=30" alt="User Profile">
-        <span class="username" id="username">John Doe</span>
+      <img src="/public/anime.jpg?height=30&width=30" alt="User Profile" />
+      <span class="username" id="username">John Doe</span>
     </div>
 
     <div class="container">
-        <h1 class="app-title">Enhanced Todo App</h1>
-        <div class="todo-input">
-            <input type="text" id="todo-input" placeholder="Add a new task..." aria-label="Enter a new task">
-            <button onclick="addTodo()">
-                <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <line x1="12" y1="5" x2="12" y2="19"></line>
-                    <line x1="5" y1="12" x2="19" y2="12"></line>
-                </svg>
-                Add
-            </button>
-        </div>
-        <ul id="todo-list" class="todo-list"></ul>
+      <h1 class="app-title">Enhanced Todo App</h1>
+      <div class="todo-input">
+        <input
+          type="text"
+          id="todo-input"
+          placeholder="Add a new task..."
+          aria-label="Enter a new task"
+        />
+
+        <button onclick="addTodo()">
+          <svg
+            class="icon"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <line x1="12" y1="5" x2="12" y2="19"></line>
+            <line x1="5" y1="12" x2="19" y2="12"></line>
+          </svg>
+          Add
+        </button>
+      </div>
+      <ul id="todo-list" class="todo-list"></ul>
     </div>
+    <div id="paragraph"></div>
     <script>
-        async function fetchUsername() {
-            try{
-                const response=await axios.post("http://localhost:9000/todo-user-info",{},{
-             withCredentials: true
-             })
-             const usernameInfo=response.data.username
-             console.log(usernameInfo)
-             document.getElementById("username").innerText=usernameInfo
-            }catch(err){
-                console.error("Error fetching user info:", error);
+      const data = document.getElementById("paragraph");
+
+      let id_no = 0;
+      let todo = [];
+
+      async function fetchUsername() {
+        try {
+          const response = await axios.post(
+            "http://localhost:9000/todo-user-info",
+            {},
+            {
+              withCredentials: true,
             }
-          
+          );
+          const usernameInfo = response.data.username;
+          document.getElementById("username").innerText = usernameInfo;
+        } catch (err) {
+          console.error("Error fetching user info:", error);
         }
-        window.onload = function() {
-      fetchUsername();
+      }
+      window.onload = function () {
+        fetchUsername();
+      };
+
+      function addTodo() {
+        const user = document.getElementById("todo-input");
+        const userinput = user.value;
+        addid();
+        todo.push({
+          id: id_no,
+          title: userinput,
+        });
+        addText();
+        user.value = "";
+      }
+
+      function addid() {
+        id_no++;
+      }
+
+      function addText() {
+        const getData = todo.map((req) => req.title);
+        let innerValue = "";
+        for (let i = 0; i < getData.length; i++) {
+          const findId = todo.filter((req) => req.title === getData[i]);
+          console.log(findId)
+          const id__title = findId[0].id;
+          innerValue += ` <div class="task-item">
+                <p>${getData[i]}</p>
+                <div class="task-buttons">
+                    <button class="edit-btn" onclick="editTask(${id__title})">Edit</button>
+                    <button class="delete-btn" onclick="deleteTask(${id__title})">Delete</button>
+                </div>
+            </div>`;
+        }
+        data.innerHTML = innerValue;
+      }
+
+      function deleteTask(element) {
+        const data = element;
+        todo = todo.filter((req) => req.id !== data);
+        addText();
+      }
+      function editTask(element) {
+        let userChange = prompt("Edit the task");
+        const datavalue = element;
+        todo = todo.map((data) => {
+          if (data.id === datavalue) {
+            return { ...data, title: userChange };
+          }
+          return data;
+        });
+        addText();
       }
     </script>
-</body>
+  </body>
 </html>
