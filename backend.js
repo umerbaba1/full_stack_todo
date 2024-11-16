@@ -82,9 +82,7 @@ app.post('/signin', (req, res) => {
             secure: process.env.NODE_ENV === 'production', // Only send over HTTPS in production
             maxAge: 604800000, // 1 hour
         });
-        res.json({
-            msg:token
-        })
+        res.redirect('/todo')
     }
 });
 
@@ -95,5 +93,21 @@ app.get('/dashboard',auth,(req,res)=>{
         msg:username
     })
 })
+
+//Todo Page
+app.get('/todo',auth,(req,res)=>{
+    res.sendFile(__dirname + "\\public\\todo.html");
+})
+
+app.post('/todo-backend',auth,(req,res)=>{
+  
+})
+
+app.post('/todo-user-info',auth,(req,res)=>{
+    const username=req.username
+    res.json({username:username})
+})
+
+
 
 app.listen(9000)
