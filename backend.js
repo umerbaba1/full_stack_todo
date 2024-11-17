@@ -99,10 +99,8 @@ app.get('/todo',auth,(req,res)=>{
     res.sendFile(__dirname + "\\public\\todo.html");
 })
 
-app.post('/todo-backend',auth,(req,res)=>{
-  
-})
 
+//Diplaying Username
 app.post('/todo-user-info',auth,(req,res)=>{
     const username=req.username
     res.json({username:username})
