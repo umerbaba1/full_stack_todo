@@ -1,9 +1,31 @@
 const data = document.getElementById("paragraph");
-const  userProfile=document.getElementById("user-info")
 
-userProfile.addEventListener("click",()=>{
-    
-})
+
+  const userInfo = document.getElementById('user-info');
+  const profileBox = document.getElementById('profile-box');
+  const closeProfile = document.getElementById('close-profile');
+
+  userInfo.addEventListener('click', function() {
+    profileBox.classList.add('open');
+  });
+
+  closeProfile.addEventListener('click', function() {
+    profileBox.classList.remove('open');
+  });
+
+  document.addEventListener("click",function(event){
+    console.log(event.target)
+    if(!profileBox.contains(event.target) && !userInfo.contains(event.target)){
+      profileBox.classList.remove("open")
+    }
+  })
+
+  async function logout(){
+    const response= await axios.post("http://localhost:9000/cookie-clear")
+    console.log(response.data.msg)
+    window.location.href="http://localhost:9000/signIN"
+  }
+
 
 let id_no = 0;
 let todo = [];
@@ -19,6 +41,7 @@ async function fetchUsername() {
     );
     const usernameInfo = response.data.username;
     document.getElementById("username").innerText = usernameInfo;
+    document.getElementById("list-user").innerText=usernameInfo
   } catch (err) {
     console.error("Error fetching user info:", error);
   }
