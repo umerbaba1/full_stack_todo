@@ -1,11 +1,11 @@
-@import url('https://fonts.googleapis.com/css2?family=Bungee+Shade&family=Roboto:wght@400;700&display=swap');
-
 :root {
-  --color-neon: #39ff14;
-  --color-hot-pink: #ff69b4;
-  --color-electric-blue: #7df9ff;
-  --color-cyber-yellow: #ffd300;
-  --color-background: #1a1a1a;
+  --color-primary: #00ffff;
+  --color-secondary: #ff00ff;
+  --color-tertiary: #ff8c00;
+  --color-background: #1a1a2e;
+  --color-text: #ffffff;
+  --color-input-bg: rgba(255, 255, 255, 0.1);
+  --font-main: 'Poppins', sans-serif;
 }
 
 * {
@@ -15,68 +15,131 @@
 }
 
 body {
-  font-family: 'Roboto', sans-serif;
+  font-family: var(--font-main);
   background-color: var(--color-background);
-  color: var(--color-neon);
+  color: var(--color-text);
   min-height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
-  overflow: hidden;
+  overflow-x: hidden;
 }
 
 .container {
   width: 100%;
   max-width: 1000px;
   display: flex;
-  transform: skew(-5deg);
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
 }
 
 .left-section {
   flex: 1;
+  background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.left-section::before {
+  content: '';
+  position: absolute;
+  width: 200%;
+  height: 200%;
   background: repeating-linear-gradient(
-    45deg,
-    var(--color-hot-pink),
-    var(--color-hot-pink) 10px,
-    var(--color-electric-blue) 10px,
-    var(--color-electric-blue) 20px
+      45deg,
+      transparent,
+      transparent 10px,
+      rgba(255, 255, 255, 0.1) 10px,
+      rgba(255, 255, 255, 0.1) 20px
   );
-  clip-path: polygon(0 0, 100% 0, 80% 100%, 0 100%);
+  animation: move-background 20s linear infinite;
+}
+
+@keyframes move-background {
+  0% {
+      transform: translate(-50%, -50%) rotate(0deg);
+  }
+  100% {
+      transform: translate(-50%, -50%) rotate(360deg);
+  }
+}
+
+.logo-container {
+  width: 150px;
+  height: 150px;
+  position: relative;
+  z-index: 1;
+}
+
+.logo-outer {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: var(--color-tertiary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
   animation: pulse 2s infinite alternate;
 }
 
 @keyframes pulse {
-  from { opacity: 0.7; }
-  to { opacity: 1; }
+  0% {
+      transform: scale(1);
+      box-shadow: 0 0 0 0 rgba(255, 140, 0, 0.7);
+  }
+  100% {
+      transform: scale(1.05);
+      box-shadow: 0 0 0 20px rgba(255, 140, 0, 0);
+  }
+}
+
+.logo-inner {
+  width: 80%;
+  height: 80%;
+  border-radius: 50%;
+  background: var(--color-background);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.logo-text {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--color-tertiary);
+  text-transform: uppercase;
 }
 
 .right-section {
   flex: 1;
-  background-color: rgba(26, 26, 26, 0.8);
-  padding: 2rem;
-  clip-path: polygon(20% 0, 100% 0, 100% 100%, 0 100%);
-  border: 3px solid var(--color-neon);
-  box-shadow: 0 0 20px var(--color-neon);
+  padding: 3rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 h2 {
-  font-family: 'Bungee Shade', cursive;
-  font-size: 3rem;
-  text-align: center;
-  margin-bottom: 2rem;
-  color: var(--color-cyber-yellow);
-  text-shadow: 3px 3px 0 var(--color-hot-pink),
-               6px 6px 0 var(--color-electric-blue);
-  animation: glitch 1s infinite alternate;
+  font-size: 2.5rem;
+  margin-bottom: 1.5rem;
+  background: linear-gradient(to right, var(--color-primary), var(--color-secondary));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: color-shift 5s linear infinite;
 }
 
-@keyframes glitch {
-  0% { transform: translate(0); }
-  20% { transform: translate(-5px, 5px); }
-  40% { transform: translate(-5px, -5px); }
-  60% { transform: translate(5px, 5px); }
-  80% { transform: translate(5px, -5px); }
-  100% { transform: translate(0); }
+@keyframes color-shift {
+  0% {
+      filter: hue-rotate(0deg);
+  }
+  100% {
+      filter: hue-rotate(360deg);
+  }
 }
 
 .signup-form {
@@ -86,27 +149,23 @@ h2 {
 }
 
 .input-group {
-  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
 }
 
 label {
-  position: absolute;
-  left: 1rem;
-  top: 0.5rem;
-  color: var(--color-neon);
-  font-size: 0.8rem;
-  text-transform: uppercase;
-  pointer-events: none;
-  transition: all 0.3s ease;
+  color: var(--color-text);
+  font-size: 0.9rem;
 }
 
 input {
   width: 100%;
   padding: 1rem;
-  background-color: rgba(255, 255, 255, 0.1);
-  border: 2px solid var(--color-electric-blue);
-  border-radius: 0;
-  color: var(--color-neon);
+  background-color: var(--color-input-bg);
+  border: 2px solid var(--color-primary);
+  border-radius: 5px;
+  color: var(--color-text);
   font-size: 1rem;
   transition: all 0.3s ease;
 }
@@ -117,26 +176,18 @@ input::placeholder {
 
 input:focus {
   outline: none;
-  border-color: var(--color-hot-pink);
-  box-shadow: 0 0 10px var(--color-hot-pink);
-}
-
-input:focus + label,
-input:not(:placeholder-shown) + label {
-  top: -1.5rem;
-  left: 0;
-  font-size: 0.7rem;
-  color: var(--color-hot-pink);
+  border-color: var(--color-secondary);
+  box-shadow: 0 0 10px var(--color-secondary);
 }
 
 .signup-button {
-  background-color: var(--color-cyber-yellow);
+  background: linear-gradient(to right, var(--color-primary), var(--color-secondary));
   color: var(--color-background);
   border: none;
   padding: 1rem;
-  font-size: 1.2rem;
-  font-weight: bold;
-  text-transform: uppercase;
+  border-radius: 5px;
+  font-size: 1rem;
+  font-weight: 600;
   cursor: pointer;
   transition: all 0.3s ease;
   position: relative;
@@ -150,46 +201,51 @@ input:not(:placeholder-shown) + label {
   left: -50%;
   width: 200%;
   height: 200%;
-  background: conic-gradient(
-    var(--color-neon),
-    var(--color-hot-pink),
-    var(--color-electric-blue),
-    var(--color-cyber-yellow)
-  );
-  animation: rotate 4s linear infinite;
+  background: radial-gradient(circle, var(--color-tertiary), transparent);
   opacity: 0;
   transition: opacity 0.3s ease;
 }
 
 .signup-button:hover::before {
-  opacity: 1;
+  opacity: 0.3;
 }
 
-.signup-button span {
-  position: relative;
-  z-index: 1;
+.signup-button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 5px 15px rgba(0, 255, 255, 0.4);
 }
 
-@keyframes rotate {
-  100% { transform: rotate(360deg); }
+.signin-link {
+  margin-top: 2rem;
+  text-align: center;
+  font-size: 0.9rem;
+}
+
+.signin-link a {
+  color: var(--color-primary);
+  text-decoration: none;
+  font-weight: 600;
+  transition: color 0.3s ease;
+}
+
+.signin-link a:hover {
+  color: var(--color-secondary);
 }
 
 @media (max-width: 768px) {
   .container {
-    flex-direction: column;
-    transform: skew(0);
-  }
-
-  .left-section,
-  .right-section {
-    clip-path: none;
+      flex-direction: column;
   }
 
   .left-section {
-    height: 150px;
+      min-height: 200px;
+  }
+
+  .right-section {
+      padding: 2rem;
   }
 
   h2 {
-    font-size: 2rem;
+      font-size: 2rem;
   }
 }

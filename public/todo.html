@@ -13,6 +13,9 @@
         --card-background: #ffffff;
         --text-color: #333333;
         --border-color: #e0e0e0;
+        --success-color: #2ecc71;
+        --warning-color: #f39c12;
+        --danger-color: #e74c3c;
       }
 
       * {
@@ -22,7 +25,7 @@
       }
 
       body {
-        font-family: "Arial", sans-serif;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
         background-color: var(--background-color);
         color: var(--text-color);
         line-height: 1.6;
@@ -38,7 +41,12 @@
         background-color: var(--card-background);
         padding: 10px 15px;
         border-radius: 25px;
-        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease;
+      }
+
+      .user-info:hover {
+        transform: translateY(-2px);
       }
 
       .user-info img {
@@ -46,43 +54,51 @@
         height: 30px;
         border-radius: 50%;
         margin-right: 10px;
+        object-fit: cover;
       }
 
       .username {
         font-size: 0.9rem;
         font-weight: bold;
+        color: var(--primary-color);
       }
 
       .container {
         max-width: 600px;
         margin: 0 auto;
         padding: 20px;
+        background-color: var(--card-background);
+        border-radius: 8px;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
       }
 
       .app-title {
-        font-size: 2rem;
+        font-size: 2.5rem;
         color: var(--primary-color);
-        margin-bottom: 20px;
+        margin-bottom: 30px;
         text-align: center;
+        text-transform: uppercase;
+        letter-spacing: 2px;
       }
 
       .todo-input {
         display: flex;
-        margin-bottom: 20px;
+        margin-bottom: 30px;
       }
 
       .todo-input input {
         flex-grow: 1;
-        padding: 12px;
+        padding: 12px 15px;
         font-size: 1rem;
         border: 2px solid var(--border-color);
         border-radius: 5px 0 0 5px;
-        transition: border-color 0.3s ease;
+        transition: all 0.3s ease;
       }
 
       .todo-input input:focus {
         outline: none;
         border-color: var(--primary-color);
+        box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2);
       }
 
       .todo-input button {
@@ -93,11 +109,18 @@
         border: none;
         border-radius: 0 5px 5px 0;
         cursor: pointer;
-        transition: background-color 0.3s ease;
+        transition: all 0.3s ease;
+        display: flex;
+        align-items: center;
       }
 
       .todo-input button:hover {
         background-color: var(--primary-hover);
+        transform: translateY(-2px);
+      }
+
+      .todo-input button .icon {
+        margin-right: 5px;
       }
 
       .todo-list {
@@ -108,15 +131,22 @@
         background-color: var(--card-background);
         padding: 15px;
         border-radius: 5px;
-        margin-bottom: 10px;
+        margin-bottom: 15px;
         display: flex;
         justify-content: space-between;
         align-items: center;
         box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        transition: all 0.3s ease;
+      }
+
+      .todo-item:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
       }
 
       .todo-text {
         flex-grow: 1;
+        font-size: 1.1rem;
       }
 
       .todo-actions button {
@@ -126,11 +156,14 @@
         font-size: 0.9rem;
         color: var(--primary-color);
         margin-left: 10px;
-        transition: color 0.3s ease;
+        transition: all 0.3s ease;
+        padding: 5px 10px;
+        border-radius: 3px;
       }
 
       .todo-actions button:hover {
         color: var(--primary-hover);
+        background-color: rgba(52, 152, 219, 0.1);
       }
 
       .icon {
@@ -138,73 +171,99 @@
         height: 16px;
         vertical-align: middle;
       }
-      /* Styling for added elements */
-      #paragraph p {
-        background-color: #ffffff; /* Card background */
-        border: 1px solid #e0e0e0; /* Light border for separation */
-        border-radius: 5px; /* Rounded corners */
-        padding: 10px; /* Space inside the box */
-        margin: 5px 0; /* Space between elements */
-        font-size: 1rem; /* Text size */
-        color: #333333; /* Text color */
-        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
-        transition: transform 0.2s, background-color 0.2s; /* Animation for hover */
+
+      #paragraph {
+        margin-top: 30px;
       }
 
-      /* Hover effect for added elements */
-      #paragraph p:hover {
-        background-color: #f9f9f9; /* Slightly lighter background */
-        transform: scale(1.02); /* Slight zoom effect */
-      }
-      /* Task item container */
       .task-item {
         display: flex;
         justify-content: space-between;
         align-items: center;
-        background-color: #ffffff; /* Card background */
-        border: 1px solid #e0e0e0; /* Border */
-        border-radius: 5px; /* Rounded corners */
-        padding: 10px;
-        margin: 5px 0;
-        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+        background-color: var(--card-background);
+        border: 1px solid var(--border-color);
+        border-radius: 5px;
+        padding: 15px;
+        margin: 10px 0;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        transition: all 0.3s ease;
       }
 
-      /* Task buttons container */
+      .task-item:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+      }
+
+      .task-item p {
+        font-size: 1.1rem;
+        color: var(--text-color);
+        margin: 0;
+      }
+
       .task-buttons {
         display: flex;
-        gap: 10px; /* Space between buttons */
+        gap: 10px;
       }
 
-      /* Button base style */
       .task-buttons button {
-        padding: 5px 10px;
+        background: none;
         border: none;
-        border-radius: 3px;
-        font-size: 0.9rem;
         cursor: pointer;
-        transition: background-color 0.2s, transform 0.2s;
+        padding: 5px;
+        border-radius: 50%;
+        transition: all 0.3s ease;
       }
 
-      /* Edit button style */
-      .edit-btn {
-        background-color: #f39c12; /* Orange */
-        color: white;
+      .task-buttons button:hover {
+        background-color: rgba(0, 0, 0, 0.1);
       }
 
-      .edit-btn:hover {
-        background-color: #e67e22; /* Darker orange */
-        transform: scale(1.05);
+      .task-buttons svg {
+        width: 20px;
+        height: 20px;
+        transition: all 0.3s ease;
       }
 
-      /* Delete button style */
-      .delete-btn {
-        background-color: #e74c3c; /* Red */
-        color: white;
+      .edit-btn svg {
+        fill: var(--warning-color);
       }
 
-      .delete-btn:hover {
-        background-color: #c0392b; /* Darker red */
-        transform: scale(1.05);
+      .edit-btn:hover svg {
+        fill: #e67e22;
+      }
+
+      .delete-btn svg {
+        fill: var(--danger-color);
+      }
+
+      .delete-btn:hover svg {
+        fill: #c0392b;
+      }
+
+      @media (max-width: 600px) {
+        .container {
+          padding: 15px;
+        }
+
+        .app-title {
+          font-size: 2rem;
+        }
+
+        .todo-input input,
+        .todo-input button {
+          font-size: 0.9rem;
+        }
+
+        .task-item {
+          flex-direction: column;
+          align-items: flex-start;
+        }
+
+        .task-buttons {
+          margin-top: 10px;
+          width: 100%;
+          justify-content: flex-end;
+        }
       }
     </style>
   </head>
@@ -243,6 +302,7 @@
       <ul id="todo-list" class="todo-list"></ul>
     </div>
     <div id="paragraph"></div>
+
     <script>
       const data = document.getElementById("paragraph");
 
@@ -289,15 +349,25 @@
         let innerValue = "";
         for (let i = 0; i < getData.length; i++) {
           const findId = todo.filter((req) => req.title === getData[i]);
-          console.log(findId)
+          console.log(findId);
           const id__title = findId[0].id;
-          innerValue += ` <div class="task-item">
-                <p>${getData[i]}</p>
-                <div class="task-buttons">
-                    <button class="edit-btn" onclick="editTask(${id__title})">Edit</button>
-                    <button class="delete-btn" onclick="deleteTask(${id__title})">Delete</button>
-                </div>
-            </div>`;
+          innerValue += `
+          <div class="task-item">
+  <p>${getData[i]}</p>
+  <div class="task-buttons">
+    <button class="edit-btn" onclick="editTask(${id__title})" aria-label="Edit task">
+      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path d="M20.71,7.04C21.1,6.65 21.1,6 20.71,5.63L18.37,3.29C18,2.9 17.35,2.9 16.96,3.29L15.12,5.12L18.87,8.87M3,17.25V21H6.75L17.81,9.93L14.06,6.18L3,17.25Z"/>
+      </svg>
+    </button>
+    <button class="delete-btn" onclick="deleteTask(${id__title})" aria-label="Delete task">
+      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path d="M19,4H15.5L14.5,3H9.5L8.5,4H5V6H19M6,19A2,2 0 0,0 8,21H16A2,2 0 0,0 18,19V7H6V19Z"/>
+      </svg>
+    </button>
+  </div>
+</div>
+          `;
         }
         data.innerHTML = innerValue;
       }

@@ -1,0 +1,76 @@
+<script>
+      const data = document.getElementById("paragraph");
+
+      let id_no = 0;
+      let todo = [];
+
+      async function fetchUsername() {
+        try {
+          const response = await axios.post(
+            "http://localhost:9000/todo-user-info",
+            {},
+            {
+              withCredentials: true,
+            }
+          );
+          const usernameInfo = response.data.username;
+          document.getElementById("username").innerText = usernameInfo;
+        } catch (err) {
+          console.error("Error fetching user info:", error);
+        }
+      }
+      window.onload = function () {
+        fetchUsername();
+      };
+
+      function addTodo() {
+        const user = document.getElementById("todo-input");
+        const userinput = user.value;
+        addid();
+        todo.push({
+          id: id_no,
+          title: userinput,
+        });
+        addText();
+        user.value = "";
+      }
+
+      function addid() {
+        id_no++;
+      }
+
+      function addText() {
+        const getData = todo.map((req) => req.title);
+        let innerValue = "";
+        for (let i = 0; i < getData.length; i++) {
+          const findId = todo.filter((req) => req.title === getData[i]);
+          console.log(findId)
+          const id__title = findId[0].id;
+          innerValue += ` <div class="task-item">
+                <p>${getData[i]}</p>
+                <div class="task-buttons">
+                    <button class="edit-btn" onclick="editTask(${id__title})">Edit</button>
+                    <button class="delete-btn" onclick="deleteTask(${id__title})">Delete</button>
+                </div>
+            </div>`;
+        }
+        data.innerHTML = innerValue;
+      }
+
+      function deleteTask(element) {
+        const data = element;
+        todo = todo.filter((req) => req.id !== data);
+        addText();
+      }
+      function editTask(element) {
+        let userChange = prompt("Edit the task");
+        const datavalue = element;
+        todo = todo.map((data) => {
+          if (data.id === datavalue) {
+            return { ...data, title: userChange };
+          }
+          return data;
+        });
+        addText();
+      }
+    </script>
