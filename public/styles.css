@@ -249,3 +249,22 @@ input:focus {
       font-size: 2rem;
   }
 }
+.task-text {
+  position: relative;
+  transition: color 0.3s ease;
+}
+
+.task-completed .task-text {
+  color: #888;
+}
+
+.task-completed .task-text::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  width: 100%;
+  height: 1px;
+  background-color: #888;
+  transform: translateY(-50%);
+}

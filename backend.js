@@ -101,7 +101,7 @@ app.get('/todo', auth, (req, res) => {
 
 
 //Diplaying Username
-app.post('/todo-user-info', auth, (req, res) => {
+app.get('/todo-user-info', auth, (req, res) => {
     const username = req.username
     res.json({ username: username })
 })

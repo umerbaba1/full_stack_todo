@@ -361,3 +361,131 @@
       right: -100%;
     }
   }
+  /* .task-checkbox {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    border: 2px solid #3498db;
+    border-radius: 4px;
+    outline: none;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    position: relative;
+    margin-right: 10px;
+  }
+  
+  .task-checkbox:checked {
+    background-color: #3498db;
+    border-color: #3498db;
+  }
+  
+  .task-checkbox:checked::before {
+    content: '\2714';
+    font-size: 14px;
+    color: white;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  
+  .task-item {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    margin: 5px 0;
+    background-color: #f4f4f4;
+    border-radius: 4px;
+  }
+  
+  .task-text {
+    font-size: 16px;
+    color: #333;
+    transition: all 0.3s ease;
+  }
+  
+  .task-completed .task-text {
+    text-decoration: line-through;
+    color: #888;
+  }
+   */
+   /* Basic task checkbox styles */
+/* Basic task checkbox styles */
+/* Basic task checkbox styles */
+/* Basic task checkbox styles */
+/* Basic task checkbox styles */
+/* Basic task checkbox styles */
+/* Basic task checkbox styles */
+/* Basic task checkbox styles */
+.task-checkbox {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border: 2px solid #333; /* Border for the checkbox */
+  border-radius: 4px;
+  outline: none;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  margin-right: 10px;
+  position: relative;
+}
+
+/* When checkbox is checked, make it black */
+.task-checkbox:checked {
+  background-color: #333; /* Black background */
+  border-color: #333; /* Black border */
+}
+
+/* Add a checkmark when checked */
+.task-checkbox:checked::before {
+  content: '\2714'; /* Checkmark symbol */
+  color: white;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%); /* Center the checkmark */
+  font-size: 14px;
+}
+
+/* Task item container */
+.task-item {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  margin: 5px 0;
+  background-color: #f4f4f4;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+  cursor: pointer;
+}
+
+/* Task text, initially plain */
+.task-text {
+  font-size: 16px;
+  color: #333; /* Normal text color */
+  transition: all 0.3s ease;
+  flex-grow: 1;
+}
+
+/* When the task is completed, reduce color saturation and change background */
+.task-completed .task-text {
+  color: #bbb; /* Light gray text color for completed tasks */
+  font-style: italic; /* Make text italicized for more distinction */
+}
+
+/* Background color change for completed task */
+.task-completed {
+  background-color: #e9ecef; /* Light gray background when completed */
+}
+
+/* Keep the checkbox style the same */
+.task-completed .task-checkbox {
+  background-color: #333; /* Keep the checkbox black when checked */
+  border-color: #333;
+}
+
+
